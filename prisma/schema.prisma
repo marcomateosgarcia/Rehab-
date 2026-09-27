@@ -1,0 +1,21 @@
+// Esquema de Prisma: aquí defines tablas (models) y Prisma genera el cliente TypeScript.
+// Docs: https://www.prisma.io/docs/orm/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Paciente de ejemplo — sustituye o amplía según tu dominio (Rehab pro).
+model Patient {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  fullName  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
